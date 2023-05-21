@@ -282,47 +282,59 @@ class ChillerResult extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text(
-                        'Saving Per Year',
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Text(
+                          'Saving Per Year',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                        ),
+                      ),
+                      Text(
+                        'Return on Investment',
                         style:
                             Theme.of(context).textTheme.displayLarge!.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                       ),
-                    ),
-                    Text(
-                      'Return on Investment',
-                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text(
-                        '\$ $label7',
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Text(
+                          '\$ $label7',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                        ),
+                      ),
+                      Text(
+                        '$label33_2 years',
                         style:
                             Theme.of(context).textTheme.displayLarge!.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                       ),
-                    ),
-                    Text(
-                      '$label33_2 years',
-                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                    ),
-                  ],
+                    ],
+                  ),
                 )
               ],
             )
