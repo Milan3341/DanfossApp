@@ -5,11 +5,13 @@ class CustomSlliderLabel extends StatelessWidget {
   final dynamic value;
   dynamic numroundedlider;
   bool display;
+  bool displayLabel2;
   CustomSlliderLabel(
       {super.key,
       this.numroundedlider = 0,
       required this.value,
       required this.label,
+      this.displayLabel2 = true,
       this.display = true});
 
   @override
@@ -25,11 +27,14 @@ class CustomSlliderLabel extends StatelessWidget {
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                 ),
-                Text(
-                  value.toStringAsFixed(numroundedlider),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
+                Visibility(
+                  visible: displayLabel2,
+                  child: Text(
+                    value.toStringAsFixed(numroundedlider),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                  ),
                 )
               ],
             )

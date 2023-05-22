@@ -15,11 +15,41 @@ class HydroBaseline extends StatelessWidget {
   final dynamic slider6_21;
   final dynamic slider6_18;
   final dynamic slider6_19;
+  final dynamic label61_3;
+  final dynamic label48_54;
+  final dynamic label48_34;
+  final dynamic label102;
+  final dynamic label48_55;
+  final dynamic label106;
+  final dynamic label53_1;
+  final dynamic label48_57;
+  final dynamic label48_58;
+  final dynamic label108;
+  final dynamic label63_1;
+  final dynamic label102_1;
+  final dynamic label86;
+  final dynamic label100;
+  final dynamic label99;
 
   final bool hydroMetricBool;
 
   const HydroBaseline({
     super.key,
+    required this.label100,
+    required this.label102,
+    required this.label102_1,
+    required this.label106,
+    required this.label108,
+    required this.label48_34,
+    required this.label48_54,
+    required this.label48_55,
+    required this.label48_57,
+    required this.label48_58,
+    required this.label53_1,
+    required this.label61_3,
+    required this.label63_1,
+    required this.label86,
+    required this.label99,
     required this.slider6_21,
     required this.slider6_20,
     required this.slider6_19,
@@ -38,10 +68,14 @@ class HydroBaseline extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Baseline'),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 2, left: 10, right: 10, bottom: 60),
+        padding: const EdgeInsets.only(top: 2, left: 10, right: 10, bottom: 60),
         child: Column(
           children: [
-            CustomSlliderLabel(value: slider6_14, label: 'Capacity'),
+            CustomSlliderLabel(
+              displayLabel2: false,
+              value: slider6_14,
+              label: 'Capacity',
+            ),
             CustomSlider(
                 max: 1000,
                 min: 100,
@@ -52,23 +86,32 @@ class HydroBaseline extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                  'Ton ${slider6_14.toStringAsFixed(0)}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(color: Theme.of(context).colorScheme.secondary),
+                Expanded(
+                  child: Text(
+                    'Ton ${slider6_14.toStringAsFixed(0)}',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Theme.of(context).colorScheme.secondary),
+                  ),
                 ),
-                Text(
-                  'Kwr 5.86',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(color: Theme.of(context).colorScheme.secondary),
+                Visibility(
+                  visible: hydroMetricBool,
+                  child: Expanded(
+                    child: Text(
+                      'Kwr $label48_34',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: Theme.of(context).colorScheme.secondary),
+                    ),
+                  ),
                 )
               ],
             ),
-            CustomSlliderLabel(value: slider6_15, label: 'Chiller COP'),
+            CustomSlliderLabel(
+              value: slider6_15,
+              label: 'Chiller COP',
+              displayLabel2: false,
+            ),
             CustomSlider(
                 max: 99,
                 min: 25,
@@ -79,19 +122,24 @@ class HydroBaseline extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                  'Ton ${slider6_15.toStringAsFixed(1)}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(color: Theme.of(context).colorScheme.secondary),
+                Expanded(
+                  child: Text(
+                    'Tr /Kw ${(slider6_15 / 100).toStringAsFixed(2)}',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Theme.of(context).colorScheme.secondary),
+                  ),
                 ),
-                Text(
-                  'Kwr ${123}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(color: Theme.of(context).colorScheme.secondary),
+                Visibility(
+                  visible: hydroMetricBool,
+                  child: Expanded(
+                    child: Text(
+                      'Kwr ${label61_3}',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: Theme.of(context).colorScheme.secondary),
+                    ),
+                  ),
                 )
               ],
             ),
@@ -146,7 +194,7 @@ class HydroBaseline extends StatelessWidget {
                             top: 35,
                             left: 80,
                             child: Text(
-                              'KW/RT \n 0.04',
+                              'KW/RT \n ${label106}',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                           ),
@@ -154,7 +202,7 @@ class HydroBaseline extends StatelessWidget {
                             bottom: 20,
                             left: 110,
                             child: Text(
-                              'KPA \n 2',
+                              'KPA \n $label53_1',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                           ),
@@ -162,7 +210,7 @@ class HydroBaseline extends StatelessWidget {
                             bottom: 20,
                             right: 80,
                             child: Text(
-                              'KPA \n 2',
+                              'KPA \n $label63_1',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                           ),
@@ -170,7 +218,7 @@ class HydroBaseline extends StatelessWidget {
                             right: 80,
                             top: 15,
                             child: Text(
-                              'KW/RT \n 0.04',
+                              'KW/RT \n $label108',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                           ),
@@ -179,118 +227,147 @@ class HydroBaseline extends StatelessWidget {
                     ]),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      'CHWP',
-                      style: Theme.of(context).textTheme.displaySmall,
-                    ),
-                    Row(
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
                       children: [
-                        Column(
-                          children: [
-                            Text(
-                              'Flow L/S  125',
-                              style: Theme.of(context).textTheme.displaySmall,
-                            ),
-                            CustomVerticalSlider(
-                                max: 30,
-                                min: -20,
-                                onchanged: (dynamic value) {
-                                  onChangeSlider(value, 620);
-                                },
-                                value: slider6_20),
-                            Text(
-                              'Flow\nUSGPM',
-                              style: Theme.of(context).textTheme.displaySmall,
-                            ),
-                          ],
-                        ),
                         Text(
-                          '1173',
+                          'CHWP',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
-                        Column(
+                        Row(
                           children: [
-                            Text(
-                              '21.5',
-                              style: Theme.of(context).textTheme.displaySmall,
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Flow L/S  $label48_54',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                  CustomVerticalSlider(
+                                      max: 30,
+                                      min: -20,
+                                      onchanged: (dynamic value) {
+                                        onChangeSlider(value, 620);
+                                      },
+                                      value: slider6_20),
+                                  Text(
+                                    'Flow\nUSGPM',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                ],
+                              ),
                             ),
-                            CustomVerticalSlider(
-                                max: 30,
-                                min: -20,
-                                onchanged: (dynamic value) {
-                                  onChangeSlider(value, 621);
-                                },
-                                value: slider6_21),
-                            Text(
-                              'Head \nMts',
-                              style: Theme.of(context).textTheme.displaySmall,
+                            Expanded(
+                              child: Text(
+                                '${label102}',
+                                style: Theme.of(context).textTheme.displaySmall,
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '${label48_55.toStringAsFixed(1)}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                  CustomVerticalSlider(
+                                      max: 30,
+                                      min: -20,
+                                      onchanged: (dynamic value) {
+                                        onChangeSlider(value, 621);
+                                      },
+                                      value: slider6_21),
+                                  Text(
+                                    'Head \nMts',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'CWP',
-                      style: Theme.of(context).textTheme.displaySmall,
-                    ),
-                    Row(
+                  ),
+                  Expanded(
+                    child: Column(
                       children: [
                         Text(
-                          '1506',
+                          'CWP',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
-                        Column(
+                        Row(
                           children: [
                             Text(
-                              'Flow L/S   125',
+                              '1506',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
-                            CustomVerticalSlider(
-                                max: 30,
-                                min: -20,
-                                onchanged: (dynamic value) {
-                                  onChangeSlider(value, 618);
-                                },
-                                value: slider6_18),
-                            Text(
-                              'Flow \n USGPM',
-                              style: Theme.of(context).textTheme.displaySmall,
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Flow L/S   125',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                  CustomVerticalSlider(
+                                      max: 30,
+                                      min: -20,
+                                      onchanged: (dynamic value) {
+                                        onChangeSlider(value, 618);
+                                      },
+                                      value: slider6_18),
+                                  Text(
+                                    'Flow \n USGPM',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              '17.3',
-                              style: Theme.of(context).textTheme.displaySmall,
-                            ),
-                            CustomVerticalSlider(
-                                max: 30,
-                                min: -20,
-                                onchanged: (dynamic value) {
-                                  onChangeSlider(value, 619);
-                                },
-                                value: slider6_19),
-                            Text(
-                              'Head \n Mts',
-                              style: Theme.of(context).textTheme.displaySmall,
+                            Column(
+                              children: [
+                                Text(
+                                  '17.3',
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
+                                CustomVerticalSlider(
+                                    max: 30,
+                                    min: -20,
+                                    onchanged: (dynamic value) {
+                                      onChangeSlider(value, 619);
+                                    },
+                                    value: slider6_19),
+                                Text(
+                                  'Head \n Mts',
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ],
                     ),
-                  ],
-                )
-              ],
+                  )
+                ],
+              ),
             ),
             Column(
               children: [

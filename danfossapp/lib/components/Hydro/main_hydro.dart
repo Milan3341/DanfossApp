@@ -83,6 +83,7 @@ class _HydroPageState extends State<HydroPage> {
     //Hydronic Plant Baseline
     //Kwr
     final label48_34 = (label44_9 * 3.5).round();
+
     //chiller Cop Kwr
     final label61_3 = double.parse((12 / (label82 * 3.412)).toStringAsFixed(2));
 
@@ -117,7 +118,7 @@ class _HydroPageState extends State<HydroPage> {
     final label60 = slider6_1 / 100;
     //Left Kwrt
     final label106 = double.parse(
-        (label48_29 / label44_15 / label44_9 * label60).toStringAsFixed(3));
+        (label48_29 / label44_15 / label44_9 * label60).toStringAsFixed(2));
 
 //left kpa
     final label53_1 = (label48_55 * .102).round();
@@ -173,6 +174,7 @@ class _HydroPageState extends State<HydroPage> {
         (label44_16 * label44_14 * label44_15 * label44_13 * label55).round();
     //plant opex Per year
     final label86_1 = label49_5 + label49_7 + label50_1 + label44_8;
+    final label86 = label49_5 + label49_7 + label50_1 + label44_8;
 
     final label50 = label44_9 * label82;
     final label51 = label44_9 * label106;
@@ -182,11 +184,64 @@ class _HydroPageState extends State<HydroPage> {
     final label100 = double.parse(label76.toStringAsFixed(2));
     //Plant Cop Second Value
     final label99 = double.parse(((12 / label76) / 3.412).toStringAsFixed(2));
+    final label56 = slider7_3 / 100;
 
-//Hydronic Plant Optimise
+    final label44_17 = (label44_16 *
+            label44_14 *
+            label44_15 *
+            label44_13 *
+            label80_1 *
+            label55 *
+            label56)
+        .round();
+
+    final label48_30 = (label48_45 + label48_50 + label48_48).round();
+    //need to know
+    final label92 = label48_30;
+    final label54_1 = slider6_1 / 100;
+    //Chwp per Year
+    final label49_9 = (label92 * label44_13 * label54_1).round();
+
+    final label48_59 = (label48_37 + label48_39 + label48_43);
+
+    //need to know
+    final label96 = label48_59;
+
+    final label54 = slider6 / 100;
+    //CWP Opex per year
+    final label49_10 = (label96 * label44_13 * label54).round();
+
+    // Fan Opx Per year
+    final label50_2 = (label49_9 * .32).round();
+
+//Hydronic Plant Optimise Danfoss PIBC setup
+    final label87 = label44_17 + label49_9 + label49_10 + label50_2;
+
+    //saving per year
+    final label1 = label86 - label87;
+    final label62 = slider7_3 - 107;
+    //ECHW
+    final label59 = (label62 * -1 + 5).round();
+//Delta
+    final label63 = label62 * -1;
 
     buildBody = [
       HydroBaseline(
+        label100: label100,
+        label102: label102,
+        label102_1: label102_1,
+        label106: label106,
+        label108: label108,
+        label48_34: label48_34,
+        label48_54: label48_54,
+        label48_55: label48_55,
+        label48_57: label48_57,
+        label48_58: label48_58,
+        label53_1: label53_1,
+        label61_3: label61_3,
+        label63_1: label63_1,
+        label86: label86,
+        label99: label99,
         slider6_18: slider6_18,
         slider6_19: slider6_19,
         slider6_20: slider6_20,
@@ -199,6 +254,21 @@ class _HydroPageState extends State<HydroPage> {
         onChangeSlider: _onChangeSlider,
       ),
       HydroOptimise(
+        label100: label100,
+        label1: label1,
+        label44_8: label44_8,
+        label49_10: label49_10,
+        label49_5: label49_5,
+        label49_7: label49_7,
+        label49_9: label49_9,
+        label50_1: label50_1,
+        label50_2: label50_2,
+        label59: label59,
+        label63: label63,
+        label86: label86,
+        label87: label87,
+        label96: label96,
+        label99: label99,
         slider6: slider6,
         slider6_1: slider6_1,
         slider7_1: slider7_1,

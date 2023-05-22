@@ -14,9 +14,39 @@ class HydroOptimise extends StatelessWidget {
   final dynamic slider6;
   final bool hydroMetricBool;
   final Function onChangeSlider;
+  final dynamic label49_5;
+  final dynamic label49_7;
+  final dynamic label50_1;
+  final dynamic label44_8;
+  final dynamic label86;
+  final dynamic label100;
+  final dynamic label99;
+  final dynamic label49_9;
+  final dynamic label96;
+  final dynamic label49_10;
+  final dynamic label50_2;
+  final dynamic label87;
+  final dynamic label1;
+  final dynamic label59;
+  final dynamic label63;
 
   const HydroOptimise(
       {super.key,
+      required this.label1,
+      required this.label100,
+      required this.label44_8,
+      required this.label49_10,
+      required this.label49_5,
+      required this.label49_7,
+      required this.label49_9,
+      required this.label50_1,
+      required this.label50_2,
+      required this.label59,
+      required this.label63,
+      required this.label86,
+      required this.label87,
+      required this.label96,
+      required this.label99,
       required this.slider6,
       required this.slider6_1,
       required this.slider7_1,
