@@ -34,6 +34,7 @@ class HydroBaseline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dynamic labelPerKWhydro = slider6_16 / 100;
     return Scaffold(
       appBar: const CustomAppBar(title: 'Baseline'),
       body: SingleChildScrollView(
@@ -70,7 +71,7 @@ class HydroBaseline extends StatelessWidget {
             CustomSlliderLabel(value: slider6_15, label: 'Chiller COP'),
             CustomSlider(
                 max: 99,
-                min: 22,
+                min: 25,
                 onchanged: (dynamic newvalue) {
                   onChangeSlider(newvalue, 615);
                 },
@@ -94,14 +95,15 @@ class HydroBaseline extends StatelessWidget {
                 )
               ],
             ),
-            CustomSlliderLabel(value: slider6_16, label: '\$ Per Kw'),
+            CustomSlliderLabel(
+                value: labelPerKWhydro, numroundedlider: 2, label: '\$ Per Kw'),
             CustomSlider(
                 max: 30,
                 min: 1,
                 onchanged: (dynamic value) {
                   onChangeSlider(value, 616);
                 },
-                value: slider6_16 / 100),
+                value: slider6_16),
             CustomSlliderLabel(value: slider6_17, label: 'Run Hours Per Year'),
             CustomSlider(
                 interval: 1000,

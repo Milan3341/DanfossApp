@@ -3,14 +3,18 @@ import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 import 'custom_checkbox.dart';
 
-class CustomFloatingActionButton extends StatelessWidget {
+class CustomFloatingActionButton extends StatefulWidget {
   final List<Widget> children;
 
-  const CustomFloatingActionButton({
-    super.key,
-    required this.children,
-  });
+  CustomFloatingActionButton({super.key, required this.children});
 
+  @override
+  State<CustomFloatingActionButton> createState() =>
+      _CustomFloatingActionButtonState();
+}
+
+class _CustomFloatingActionButtonState
+    extends State<CustomFloatingActionButton> {
   @override
   Widget build(BuildContext context) {
     return ExpandableFab(
@@ -22,7 +26,7 @@ class CustomFloatingActionButton extends StatelessWidget {
           foregroundColor: Theme.of(context).colorScheme.onPrimary,
           backgroundColor: Theme.of(context).colorScheme.primary),
       type: ExpandableFabType.up,
-      children: children,
+      children: widget.children,
     );
   }
 }

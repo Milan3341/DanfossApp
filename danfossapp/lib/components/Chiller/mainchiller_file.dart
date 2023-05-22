@@ -426,6 +426,7 @@ class _ChillerState extends State<Chiller> {
       ),
     ];
 
+    bool isOpened = false;
     return Scaffold(
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: CustomFloatingActionButton(

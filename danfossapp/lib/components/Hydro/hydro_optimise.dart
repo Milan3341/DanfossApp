@@ -7,22 +7,27 @@ import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
 import '../../widgets/custom_text_for_table.dart';
 import '../../widgets/custom_vertical_slider.dart';
 
-class HydroOptimise extends StatefulWidget {
-  const HydroOptimise({super.key});
+class HydroOptimise extends StatelessWidget {
+  final dynamic slider7_1;
+  final dynamic slider7_3;
+  final dynamic slider6_1;
+  final dynamic slider6;
+  final bool hydroMetricBool;
+  final Function onChangeSlider;
 
-  @override
-  State<HydroOptimise> createState() => _HydroOptimiseState();
-}
-
-class _HydroOptimiseState extends State<HydroOptimise> {
-  double byPassvalve = 0;
-  double chillerLoadpercentage = 0;
-  double pumps = 0;
+  const HydroOptimise(
+      {super.key,
+      required this.slider6,
+      required this.slider6_1,
+      required this.slider7_1,
+      required this.slider7_3,
+      required this.hydroMetricBool,
+      required this.onChangeSlider});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Optimise'),
+      appBar: const CustomAppBar(title: 'Optimise'),
       body: SingleChildScrollView(
         padding:
             const EdgeInsets.only(top: 12, left: 10, right: 10, bottom: 60),
@@ -175,14 +180,12 @@ class _HydroOptimiseState extends State<HydroOptimise> {
                         Text('Bypass \n Valve',
                             style: Theme.of(context).textTheme.displaySmall),
                         CustomVerticalSlider(
-                            max: 100,
-                            min: -100,
+                            max: 102,
+                            min: 100,
                             onchanged: (value) {
-                              setState(() {
-                                byPassvalve = value;
-                              });
+                              onChangeSlider(value, 73);
                             },
-                            value: byPassvalve),
+                            value: slider7_3),
                       ],
                     ),
                     Column(
@@ -211,13 +214,11 @@ class _HydroOptimiseState extends State<HydroOptimise> {
                             style: Theme.of(context).textTheme.displaySmall),
                         CustomVerticalSlider(
                             max: 100,
-                            min: -100,
+                            min: 80,
                             onchanged: (value) {
-                              setState(() {
-                                byPassvalve = value;
-                              });
+                              onChangeSlider(value, 71);
                             },
-                            value: byPassvalve),
+                            value: slider7_1),
                       ],
                     ),
                     Column(
@@ -248,13 +249,11 @@ class _HydroOptimiseState extends State<HydroOptimise> {
                           children: [
                             CustomVerticalSlider(
                                 max: 100,
-                                min: -100,
+                                min: 16,
                                 onchanged: (value) {
-                                  setState(() {
-                                    byPassvalve = value;
-                                  });
+                                  onChangeSlider(value, 61);
                                 },
-                                value: byPassvalve),
+                                value: slider6_1),
                             Text(
                               'CHWP',
                               style: Theme.of(context).textTheme.displaySmall,
@@ -281,13 +280,11 @@ class _HydroOptimiseState extends State<HydroOptimise> {
                           children: [
                             CustomVerticalSlider(
                                 max: 100,
-                                min: -100,
+                                min: 16,
                                 onchanged: (value) {
-                                  setState(() {
-                                    byPassvalve = value;
-                                  });
+                                  onChangeSlider(value, 6);
                                 },
-                                value: byPassvalve),
+                                value: slider6),
                             Text(
                               'CWP',
                               style: Theme.of(context).textTheme.displaySmall,
