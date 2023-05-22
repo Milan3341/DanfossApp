@@ -198,53 +198,6 @@ class _ChillerState extends State<Chiller> {
         });
   }
 
-  // @override
-  // void initState() {
-  //   buildBody = [
-  //     ChillerA(
-  //       label10: ,
-  //       onChangeSelectedData: _selectedDatachiller1,
-  //       onChangeChillerAoilDeg: _ontapChillerAoilDeg,
-  //       onchangeSlider: _onChangeSlider,
-  //       slider2: slider2,
-  //       slider3: slider3,
-  //       slider4: slider4,
-  //       slider5: slider5,
-  //       chillerAoilDegradationBool: chillerAoilDegradationBool,
-  //       selectedData: selectedData,
-  //       chillerEffAdjbool: chillerEffAdjbool,
-  //       chillerImperialBool: chillerImperialBool,
-  //       chillerMetricBool: chillerMetricBool,
-  //     ),
-  //     ChillerB(
-  //       chillerBoilDegradationBool: chillerBoilDegradationBool,
-  //       slider2_3: slider2_3,
-  //       slider3_4: slider3_4,
-  //       slider5_4: slider5_4,
-  //       slider4_3: slider4_3,
-  //       onChangeSelectedData: _selectedDatachiller2,
-  //       onChangeChillerBoilDeg: _ontapChillerBoilDeg,
-  //       onchangeSlider: _onChangeSlider,
-  //       selectedData: selectedData2,
-  //       chillerEffAdjbool: chillerEffAdjbool,
-  //       chillerImperialBool: chillerImperialBool,
-  //       chillerMetricBool: chillerMetricBool,
-  //     ),
-  //     ChillerResult(
-  //       selectedData2: selectedData2,
-  //       onChangeSelectedData2: _selectedDatachiller2,
-  //       onChangeSelectedData: _selectedDatachiller1,
-  //       selectedData: selectedData,
-  //       onChangeSlider: _onChangeSlider,
-  //       slider1_4: slider1_4,
-  //       slider1_5: slider1_5,
-  //       calulatewithOilDeg: calulatewithOilDeg,
-  //       ontapCalulateWithOilDeg: _ontapCalculatewithOilDeg,
-  //     ),
-  //   ];
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     //Forumla for Chiller A
@@ -481,12 +434,12 @@ class _ChillerState extends State<Chiller> {
               heroTag: null,
               backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Theme.of(context).colorScheme.onPrimary,
-              onPressed: () {},
+              onPressed: null,
               label: CustomCheckBox(
                   ontap: _ontapAdj, value: chillerEffAdjbool, label: 'Adj')),
           FloatingActionButton.extended(
               heroTag: null,
-              onPressed: () {},
+              onPressed: null,
               backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Theme.of(context).colorScheme.onPrimary,
               label: CustomCheckBox(
@@ -498,7 +451,7 @@ class _ChillerState extends State<Chiller> {
               heroTag: null,
               backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Theme.of(context).colorScheme.onPrimary,
-              onPressed: () {},
+              onPressed: null,
               label: CustomCheckBox(
                   ontap: _ontapImperial,
                   value: chillerImperialBool,

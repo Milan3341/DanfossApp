@@ -17,6 +17,18 @@ class _HydroPageState extends State<HydroPage> {
   bool hydroMetricBool = true;
   List<Widget> buildBody = [];
   int selectedIndex = 0;
+  double slider6_14 = 500;
+  double slider6_15 = 60;
+  double slider6_16 = 14;
+  double slider6_17 = 5000;
+  double slider6_20 = 0;
+  double slider6_21 = 0;
+  double slider6_18 = 0;
+  double slider6_19 = 0;
+  double slider7_3 = 100;
+  double slider7_1 = 100;
+  double slider6_1 = 100;
+  double slider6 = 100;
 
   void onTap(int index) {
     setState(() {
@@ -30,14 +42,53 @@ class _HydroPageState extends State<HydroPage> {
     });
   }
 
-  @override
-  void initState() {
-    buildBody = [HydroBaseline(), HydroOptimise()];
-    super.initState();
+  void _onChangeSlider(dynamic value, int slidername) {
+    setState(() {
+      if (slidername == 614) {
+        slider6_14 = value;
+      } else if (slidername == 615) {
+        slider6_15 = value;
+      } else if (slidername == 616) {
+        slider6_16 = value;
+      } else if (slidername == 617) {
+        slider6_17 = value;
+      } else if (slidername == 620) {
+        slider6_20 = value;
+      } else if (slidername == 621) {
+        slider6_21 = value;
+      } else if (slidername == 618) {
+        slider6_18 = value;
+      } else if (slidername == 619) {
+        slider6_19 = value;
+      } else if (slidername == 73) {
+        slider7_3 = value;
+      } else if (slidername == 71) {
+        slider7_1 = value;
+      } else if (slidername == 61) {
+        slider6_1 = value;
+      } else if (slidername == 6) {
+        slider6 = value;
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    buildBody = [
+      HydroBaseline(
+        slider6_18: slider6_18,
+        slider6_19: slider6_19,
+        slider6_20: slider6_20,
+        slider6_21: slider6_21,
+        slider6_14: slider6_14,
+        slider6_15: slider6_15,
+        slider6_16: slider6_16,
+        slider6_17: slider6_17,
+        hydroMetricBool: hydroMetricBool,
+        onChangeSlider: _onChangeSlider,
+      ),
+      HydroOptimise()
+    ];
     return Scaffold(
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: CustomFloatingActionButton(children: [

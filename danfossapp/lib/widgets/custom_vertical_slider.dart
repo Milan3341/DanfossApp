@@ -13,7 +13,7 @@ class CustomVerticalSlider extends StatelessWidget {
   const CustomVerticalSlider(
       {super.key,
       this.interval = 100,
-      this.enableTooltip = false,
+      this.enableTooltip = true,
       required this.max,
       required this.min,
       required this.onchanged,

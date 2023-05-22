@@ -68,11 +68,11 @@ class ChillerB extends StatelessWidget {
     return Scaffold(
         appBar: const CustomAppBar(title: 'Chiller B'),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 6, left: 6, right: 6, bottom: 60),
+          padding: const EdgeInsets.only(bottom: 60),
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

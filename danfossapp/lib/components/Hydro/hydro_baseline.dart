@@ -5,19 +5,32 @@ import 'package:danfossapp/widgets/slider_label.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
 
-class HydroBaseline extends StatefulWidget {
-  const HydroBaseline({super.key});
+class HydroBaseline extends StatelessWidget {
+  final Function onChangeSlider;
+  final dynamic slider6_14;
+  final dynamic slider6_15;
+  final dynamic slider6_16;
+  final dynamic slider6_17;
+  final dynamic slider6_20;
+  final dynamic slider6_21;
+  final dynamic slider6_18;
+  final dynamic slider6_19;
 
-  @override
-  State<HydroBaseline> createState() => _HydroBaselineState();
-}
+  final bool hydroMetricBool;
 
-class _HydroBaselineState extends State<HydroBaseline> {
-  double capacity = 0;
-  double chillerCop = 0;
-  double perKw = 0;
-  double runPerHours = 5000;
-  double flow = 30;
+  const HydroBaseline({
+    super.key,
+    required this.slider6_21,
+    required this.slider6_20,
+    required this.slider6_19,
+    required this.slider6_18,
+    required this.onChangeSlider,
+    required this.hydroMetricBool,
+    required this.slider6_14,
+    required this.slider6_15,
+    required this.slider6_16,
+    required this.slider6_17,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +40,19 @@ class _HydroBaselineState extends State<HydroBaseline> {
         padding: EdgeInsets.only(top: 2, left: 10, right: 10, bottom: 60),
         child: Column(
           children: [
-            CustomSlliderLabel(value: capacity, label: 'Capacity'),
+            CustomSlliderLabel(value: slider6_14, label: 'Capacity'),
             CustomSlider(
-                max: 500,
-                min: -500,
+                max: 1000,
+                min: 100,
                 onchanged: (dynamic newvalue) {
-                  setState(() {
-                    capacity = newvalue;
-                  });
+                  onChangeSlider(newvalue, 614);
                 },
-                value: capacity),
+                value: slider6_14),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  'Ton ${capacity.toStringAsFixed(0)}',
+                  'Ton ${slider6_14.toStringAsFixed(0)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -56,21 +67,19 @@ class _HydroBaselineState extends State<HydroBaseline> {
                 )
               ],
             ),
-            CustomSlliderLabel(value: chillerCop, label: 'Chiller COP'),
+            CustomSlliderLabel(value: slider6_15, label: 'Chiller COP'),
             CustomSlider(
-                max: 500,
-                min: -500,
+                max: 99,
+                min: 22,
                 onchanged: (dynamic newvalue) {
-                  setState(() {
-                    chillerCop = newvalue;
-                  });
+                  onChangeSlider(newvalue, 615);
                 },
-                value: chillerCop),
+                value: slider6_15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  'Ton ${chillerCop.toStringAsFixed(1)}',
+                  'Ton ${slider6_15.toStringAsFixed(1)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -85,27 +94,23 @@ class _HydroBaselineState extends State<HydroBaseline> {
                 )
               ],
             ),
-            CustomSlliderLabel(value: perKw, label: '\$ Per Kw'),
+            CustomSlliderLabel(value: slider6_16, label: '\$ Per Kw'),
             CustomSlider(
-                max: 1000,
-                min: 0,
+                max: 30,
+                min: 1,
                 onchanged: (dynamic value) {
-                  setState(() {
-                    perKw = value;
-                  });
+                  onChangeSlider(value, 616);
                 },
-                value: perKw),
-            CustomSlliderLabel(value: runPerHours, label: 'Run Hours Per Year'),
+                value: slider6_16 / 100),
+            CustomSlliderLabel(value: slider6_17, label: 'Run Hours Per Year'),
             CustomSlider(
                 interval: 1000,
-                max: 5000,
+                max: 8760,
                 min: 0,
                 onchanged: (dynamic value) {
-                  setState(() {
-                    runPerHours = value;
-                  });
+                  onChangeSlider(value, 617);
                 },
-                value: runPerHours),
+                value: slider6_17),
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: Card(
@@ -190,14 +195,12 @@ class _HydroBaselineState extends State<HydroBaseline> {
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             CustomVerticalSlider(
-                                max: 100,
-                                min: 20,
+                                max: 30,
+                                min: -20,
                                 onchanged: (dynamic value) {
-                                  setState(() {
-                                    flow = value;
-                                  });
+                                  onChangeSlider(value, 620);
                                 },
-                                value: flow),
+                                value: slider6_20),
                             Text(
                               'Flow\nUSGPM',
                               style: Theme.of(context).textTheme.displaySmall,
@@ -215,14 +218,12 @@ class _HydroBaselineState extends State<HydroBaseline> {
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             CustomVerticalSlider(
-                                max: 100,
-                                min: 20,
+                                max: 30,
+                                min: -20,
                                 onchanged: (dynamic value) {
-                                  setState(() {
-                                    flow = value;
-                                  });
+                                  onChangeSlider(value, 621);
                                 },
-                                value: flow),
+                                value: slider6_21),
                             Text(
                               'Head \nMts',
                               style: Theme.of(context).textTheme.displaySmall,
@@ -252,14 +253,12 @@ class _HydroBaselineState extends State<HydroBaseline> {
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             CustomVerticalSlider(
-                                max: 100,
-                                min: 20,
+                                max: 30,
+                                min: -20,
                                 onchanged: (dynamic value) {
-                                  setState(() {
-                                    flow = value;
-                                  });
+                                  onChangeSlider(value, 618);
                                 },
-                                value: flow),
+                                value: slider6_18),
                             Text(
                               'Flow \n USGPM',
                               style: Theme.of(context).textTheme.displaySmall,
@@ -273,14 +272,12 @@ class _HydroBaselineState extends State<HydroBaseline> {
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             CustomVerticalSlider(
-                                max: 100,
-                                min: 20,
+                                max: 30,
+                                min: -20,
                                 onchanged: (dynamic value) {
-                                  setState(() {
-                                    flow = value;
-                                  });
+                                  onChangeSlider(value, 619);
                                 },
-                                value: flow),
+                                value: slider6_19),
                             Text(
                               'Head \n Mts',
                               style: Theme.of(context).textTheme.displaySmall,
