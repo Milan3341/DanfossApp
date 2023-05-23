@@ -10,18 +10,21 @@ class CustomVerticalSlider extends StatelessWidget {
   final bool enableTooltip;
   final Function(dynamic)? onchanged;
   final double interval;
+  final SliderTooltipPosition tooltipPosition;
   const CustomVerticalSlider(
       {super.key,
       this.interval = 100,
       this.enableTooltip = true,
       required this.max,
       required this.min,
+      this.tooltipPosition = SliderTooltipPosition.left,
       required this.onchanged,
       required this.value});
 
   @override
   Widget build(BuildContext context) {
     return SfSlider.vertical(
+        tooltipPosition: tooltipPosition,
         enableTooltip: enableTooltip,
         value: value,
         stepSize: 1,

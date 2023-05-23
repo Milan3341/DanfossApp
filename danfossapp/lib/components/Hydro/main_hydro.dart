@@ -223,7 +223,7 @@ class _HydroPageState extends State<HydroPage> {
     //ECHW
     final label59 = (label62 * -1 + 5).round();
 //Delta
-    final label63 = label62 * -1;
+    final label63 = (label62 * -1).round();
 
     buildBody = [
       HydroBaseline(
@@ -254,6 +254,7 @@ class _HydroPageState extends State<HydroPage> {
         onChangeSlider: _onChangeSlider,
       ),
       HydroOptimise(
+        label44_17: label44_17,
         label100: label100,
         label1: label1,
         label44_8: label44_8,

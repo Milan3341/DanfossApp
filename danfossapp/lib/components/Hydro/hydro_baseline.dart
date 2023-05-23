@@ -244,11 +244,14 @@ class HydroBaseline extends StatelessWidget {
                               flex: 2,
                               child: Column(
                                 children: [
-                                  Text(
-                                    'Flow L/S  $label48_54',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displaySmall,
+                                  Visibility(
+                                    visible: hydroMetricBool,
+                                    child: Text(
+                                      'Flow L/S  $label48_54',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall,
+                                    ),
                                   ),
                                   CustomVerticalSlider(
                                       max: 30,
@@ -311,18 +314,25 @@ class HydroBaseline extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Text(
-                              '1506',
-                              style: Theme.of(context).textTheme.displaySmall,
+                            Expanded(
+                              child: Text(
+                                '${label102_1}',
+                                textAlign: TextAlign.end,
+                                style: Theme.of(context).textTheme.displaySmall,
+                              ),
                             ),
                             Expanded(
+                              flex: 2,
                               child: Column(
                                 children: [
-                                  Text(
-                                    'Flow L/S   125',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displaySmall,
+                                  Visibility(
+                                    visible: hydroMetricBool,
+                                    child: Text(
+                                      'Flow L/S $label48_57',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall,
+                                    ),
                                   ),
                                   CustomVerticalSlider(
                                       max: 30,
@@ -340,26 +350,30 @@ class HydroBaseline extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Column(
-                              children: [
-                                Text(
-                                  '17.3',
-                                  style:
-                                      Theme.of(context).textTheme.displaySmall,
-                                ),
-                                CustomVerticalSlider(
-                                    max: 30,
-                                    min: -20,
-                                    onchanged: (dynamic value) {
-                                      onChangeSlider(value, 619);
-                                    },
-                                    value: slider6_19),
-                                Text(
-                                  'Head \n Mts',
-                                  style:
-                                      Theme.of(context).textTheme.displaySmall,
-                                ),
-                              ],
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '${label48_58.toStringAsFixed(1)}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                  CustomVerticalSlider(
+                                      max: 30,
+                                      min: -20,
+                                      onchanged: (dynamic value) {
+                                        onChangeSlider(value, 619);
+                                      },
+                                      value: slider6_19),
+                                  Text(
+                                    'Head \n Mts',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -377,15 +391,21 @@ class HydroBaseline extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      'Plant Opex Per Year',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.primary),
+                    Expanded(
+                      child: Text(
+                        'Plant Opex Per Year',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
                     ),
-                    Text(
-                      '\$ ${10000000}',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.primary),
+                    Expanded(
+                      child: Text(
+                        '\$ ${label86}',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
                     )
                   ],
                 ),
@@ -397,20 +417,42 @@ class HydroBaseline extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        'Plant COP',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.primary),
+                      Expanded(
+                        child: Text(
+                          'Plant COP',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
                       ),
-                      Text(
-                        ' ${0.68}',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.primary),
+                      Expanded(
+                        child: Text(
+                          ' ${label100}',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
                       ),
-                      Text(
-                        ' ${5.16}',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.primary),
+                      Visibility(
+                        visible: hydroMetricBool,
+                        child: Expanded(
+                          child: Text(
+                            ' ${label99}',
+                            textAlign: TextAlign.start,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                          ),
+                        ),
                       )
                     ],
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../widgets/custom_text_for_table.dart';
 import '../../widgets/custom_vertical_slider.dart';
@@ -29,9 +30,11 @@ class HydroOptimise extends StatelessWidget {
   final dynamic label1;
   final dynamic label59;
   final dynamic label63;
+  final dynamic label44_17;
 
   const HydroOptimise(
       {super.key,
+      required this.label44_17,
       required this.label1,
       required this.label100,
       required this.label44_8,
@@ -64,83 +67,104 @@ class HydroOptimise extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 230,
+              height: 240,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Per  Year \n ',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.primary),
-                      ),
-                      CustomTextForTable(text: 'Plant Opex'),
-                      CustomTextForTable(text: 'Chiller Opex '),
-                      CustomTextForTable(text: 'CHWP Opex '),
-                      CustomTextForTable(text: 'CWP Opex '),
-                      CustomTextForTable(text: 'Fan Opex ')
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'Per  Year \n ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
+                        CustomTextForTable(text: 'Plant Opex'),
+                        CustomTextForTable(text: 'Chiller Opex '),
+                        CustomTextForTable(text: 'CHWP Opex '),
+                        CustomTextForTable(text: 'CWP Opex '),
+                        CustomTextForTable(text: 'Fan Opex ')
+                      ],
+                    ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Conventional \n Setup',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.primary),
-                      ),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Conventional \n Setup',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
+                        CustomTextForTable(text: '\$ $label86'),
+                        CustomTextForTable(text: '\$ $label44_8'),
+                        CustomTextForTable(text: '\$ $label49_5'),
+                        CustomTextForTable(text: '\$ $label49_7'),
+                        CustomTextForTable(text: '\$ $label50_1'),
+                      ],
+                    ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'DANFOSS PIBC \n Setup',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.primary),
-                      ),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                      const CustomTextForTable(text: '\$ 10000000'),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'DANFOSS PIBC \n Setup',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        ),
+                        CustomTextForTable(text: '\$ $label87'),
+                        CustomTextForTable(text: '\$ $label44_17'),
+                        CustomTextForTable(text: '\$ $label49_9'),
+                        CustomTextForTable(text: '\$ $label49_10'),
+                        CustomTextForTable(text: '\$ $label50_2'),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                  'Saving Per Year',
-                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                Expanded(
+                  child: Text(
+                    'Saving Per Year',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                  ),
                 ),
-                Text(
-                  '\$ ${10000}',
-                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                Expanded(
+                  child: Text(
+                    '\$ $label1',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                  ),
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Card(
                 color: Theme.of(context).colorScheme.primary,
                 shape: RoundedRectangleBorder(
@@ -172,7 +196,7 @@ class HydroOptimise extends StatelessWidget {
                             bottom: 100,
                             left: 40,
                             child: Text(
-                              '12 c ECHW',
+                              '$label59 c ECHW',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                           ),
@@ -180,7 +204,7 @@ class HydroOptimise extends StatelessWidget {
                             bottom: 45,
                             left: 50,
                             child: Text(
-                              '7 c Delta T',
+                              '$label63 c Delta T',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                           ),
@@ -210,6 +234,7 @@ class HydroOptimise extends StatelessWidget {
                         Text('Bypass \n Valve',
                             style: Theme.of(context).textTheme.displaySmall),
                         CustomVerticalSlider(
+                            tooltipPosition: SliderTooltipPosition.right,
                             max: 102,
                             min: 100,
                             onchanged: (value) {
