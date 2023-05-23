@@ -1,5 +1,7 @@
 import 'package:danfossapp/config/routing.dart';
 import 'package:danfossapp/config/theme.dart';
+import 'package:danfossapp/screens/login_screens.dart';
+import 'package:danfossapp/screens/register_screens.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screens.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: MyCustomroutes.generateRoute,
       theme: theme(),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }

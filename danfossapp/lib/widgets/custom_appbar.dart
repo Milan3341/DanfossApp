@@ -11,8 +11,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        elevation: 5,
-        title: Text(title, style: Theme.of(context).textTheme.bodyLarge!));
+        elevation: 4,
+        title: Text(title,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: Theme.of(context).colorScheme.onPrimary)));
   }
 
   @override

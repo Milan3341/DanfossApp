@@ -20,6 +20,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
     return WaterDropNavBar(
+      inactiveIconColor: Theme.of(context).colorScheme.outlineVariant,
       bottomPadding: MediaQuery.of(context).size.height / 30,
       iconSize: MediaQuery.of(context).size.width * 0.07,
       waterDropColor: Theme.of(context).colorScheme.onPrimary,
