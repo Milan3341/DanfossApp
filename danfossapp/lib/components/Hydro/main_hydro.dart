@@ -98,6 +98,7 @@ class _HydroPageState extends State<HydroPage> {
 
     final label48_38 = (label48_54 * 1000 * 9.81 * label48_55) /
         (pow(10, 6) * (90 / 100) * (79.5 / 100));
+
     final label44_15 = slider6_17;
     final label48_45 = label48_38 * (label44_15 * .1);
     final label48_36 = label48_54 * 80 / 100;
@@ -113,6 +114,7 @@ class _HydroPageState extends State<HydroPage> {
     final label48_40 = pow((label48_36 / label48_35), 2) * label48_55;
     final label48_42 = (label48_35 * 1000 * 9.81 * label48_40) /
         (pow(10, 6) * (80 / 100) * (69 / 100));
+
     final label48_48 = label48_42 * (label44_15 * .3);
     final label48_29 = (label48_45 + label48_50 + label48_48).round();
     final label60 = slider6_1 / 100;
@@ -131,11 +133,12 @@ class _HydroPageState extends State<HydroPage> {
 
     final label48_51 = (label48_57 * 1000 * 9.81 * label48_58) /
         (pow(10, 6) * (90 / 100) * (80 / 100));
+
     final label48_37 = label48_51 * (label44_15 * .2);
 
     final label48_41 = label48_57 * 90 / 100;
     final label48_49 = pow((label48_41 / label48_57), 2) * label48_58;
-    final label48_53 = (label48_41 * 1000 * 9.8 * label48_49) /
+    final label48_53 = (label48_41 * 1000 * 9.81 * label48_49) /
         (pow(10, 6) * (80 / 100) * (69 / 100));
 
     final label48_39 = label48_53 * (label44_15 * .4);
@@ -196,15 +199,16 @@ class _HydroPageState extends State<HydroPage> {
         .round();
 
     final label48_30 = (label48_45 + label48_50 + label48_48).round();
-    //need to know
+    //Couldn't understand
     final label92 = label48_30;
+
     final label54_1 = slider6_1 / 100;
     //Chwp per Year
     final label49_9 = (label92 * label44_13 * label54_1).round();
 
     final label48_59 = (label48_37 + label48_39 + label48_43);
 
-    //need to know
+    //Not understood
     final label96 = label48_59;
 
     final label54 = slider6 / 100;
