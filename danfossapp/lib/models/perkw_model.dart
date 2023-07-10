@@ -14,8 +14,15 @@ class Perkwdata extends Equatable {
 
   static List<Perkwdata> perkwdatas = [
     const Perkwdata(
-        column1: "Lesotho", column2: 0.023, powerAppsId: "rGxly8ZhkwM"),
-    const Perkwdata(
-        column1: "Kyrgyzstan", column2: 0.03, powerAppsId: "qTRxSJc-wqg")
+        column1: "Sudan", column2: 0.00, powerAppsId: "C6YHhY-UtiA"),
   ];
+  factory Perkwdata.fromJson(Map<String, dynamic> json) {
+    return Perkwdata(
+      column1: json['Column1'].toString(),
+      column2: json['Column2'] != null
+          ? double.parse(json['Column2'].toString())
+          : 0.0,
+      powerAppsId: json['PowerAppsId'].toString(),
+    );
+  }
 }

@@ -1,14 +1,16 @@
+import 'package:danfossapp/bloc/Data.dart';
 import 'package:danfossapp/components/Chiller/chiller_A.dart';
-import 'package:danfossapp/components/Chiller/chiller_b.dart';
 import 'package:danfossapp/components/Chiller/result.dart';
 import 'package:danfossapp/widgets/custom_bottomnavbar.dart';
 import 'package:danfossapp/widgets/custom_floating_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import '../../models/chiller_model.dart';
 import '../../widgets/custom_checkbox.dart';
 import '../../widgets/custom_dropdown.dart';
+import 'chiller_b.dart';
 
 class Chiller extends StatefulWidget {
   const Chiller({super.key});
@@ -18,25 +20,8 @@ class Chiller extends StatefulWidget {
 }
 
 class _ChillerState extends State<Chiller> {
-  static ChillerData selectedData = const ChillerData(
-      Column1: "Air Cooled",
-      Column2: "TRANE  ",
-      Column3: "Screw ",
-      Column4: "RTAA 100",
-      Column5: 354,
-      Column6: 2.84,
-      Column7: 3.69,
-      PowerAppsId: "Z8bTucwLH1I");
-
-  static ChillerData selectedData2 = const ChillerData(
-      Column1: "Air Cooled",
-      Column2: "TRANE  ",
-      Column3: "Screw ",
-      Column4: "RTAA 100",
-      Column5: 354,
-      Column6: 2.84,
-      Column7: 3.69,
-      PowerAppsId: "Z8bTucwLH1I");
+  ChillerData selectedData = ChillerData.chillerdatalist[0];
+  ChillerData selectedData2 = ChillerData.chillerdatalist[0];
 
   int selectedIndex = 0;
   bool chillerEffAdjbool = true;
@@ -200,7 +185,12 @@ class _ChillerState extends State<Chiller> {
 
   @override
   Widget build(BuildContext context) {
+    const String url =
+        'https://djangodanfoss-production.up.railway.app/data/api/powerdata/';
+
     //Forumla for Chiller A
+    final dataBloc = BlocProvider.of<DataBloc>(context);
+    dataBloc.fetchData(url);
 
     final label36 = slider4;
 

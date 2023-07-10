@@ -1,8 +1,11 @@
+import 'package:danfossapp/config/routing.dart';
+import 'package:danfossapp/config/theme_provider.dart';
 import 'package:danfossapp/settings/liscence_agreement.dart';
 import 'package:danfossapp/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class MySettings extends StatefulWidget {
   const MySettings({super.key});
@@ -12,6 +15,25 @@ class MySettings extends StatefulWidget {
 }
 
 class _MySettingsState extends State<MySettings> {
+  bool _islogoutLoading = false;
+  final storage = new FlutterSecureStorage();
+  Future<void> _logout(BuildContext context) async {
+    setState(() {
+      _islogoutLoading = true;
+    });
+    try {
+      storage.deleteAll();
+      Navigator.pushNamed(context, MyCustomroutes.loginRoute);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Something is Wrong, Please Try Again')));
+    } finally {
+      setState(() {
+        _islogoutLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +74,8 @@ class _MySettingsState extends State<MySettings> {
                   labels: const ['On', 'off'],
                   radiusStyle: true,
                   onToggle: (index) {
-                    print('switched to: $index');
+                    if (index == 0) {
+                    } else {}
                   },
                 ),
               ],
@@ -66,7 +89,12 @@ class _MySettingsState extends State<MySettings> {
                 child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.red)),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        Navigator.pushNamed(
+                            context, MyCustomroutes.editUserRoute);
+                      });
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -92,36 +120,6 @@ class _MySettingsState extends State<MySettings> {
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-                width: 390,
-                height: 50,
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.amber)),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.warning,
-                          size: 28,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Change Password',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSecondary),
-                        )
-                      ],
-                    ))),
             const SizedBox(
               height: 50,
             ),
@@ -158,43 +156,11 @@ class _MySettingsState extends State<MySettings> {
             const SizedBox(
               height: 50,
             ),
-            const SizedBox(
-              height: 15,
-            ),
             SizedBox(
                 width: 390,
                 height: 50,
                 child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue),
-                    ),
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 50,
-                        ),
-                        const Icon(
-                          Icons.app_registration_rounded,
-                          size: 28,
-                        ),
-                        const SizedBox(
-                          width: 70,
-                        ),
-                        Text(
-                          'Sign In / Register',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        )
-                      ],
-                    ))),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-                width: 390,
-                height: 50,
-                child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => _logout(context),
                     child: Row(
                       children: [
                         const SizedBox(

@@ -1,11 +1,11 @@
 import 'package:danfossapp/widgets/custom_appbar.dart';
 import 'package:danfossapp/widgets/custom_dropdown.dart';
 import 'package:danfossapp/widgets/custom_slider.dart';
-
 import 'package:danfossapp/widgets/custom_text_for_table.dart';
 import 'package:danfossapp/widgets/slider_label.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/Data.dart';
 import '../../models/chiller_model.dart';
 import '../../widgets/custom_checkbox.dart';
 
@@ -73,274 +73,311 @@ class ChillerResult extends StatelessWidget {
   Widget build(BuildContext context) {
     final labelperkw = slider1_5 / 100;
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Chiller Result'),
-      body: SingleChildScrollView(
-        padding:
-            const EdgeInsets.only(top: 15, left: 10, right: 10, bottom: 60),
-        child: Column(
-          children: [
-            CustomSlliderLabel(value: slider1_4, label: 'Operating Hours'),
-            CustomSlider(
-                max: 8760,
-                min: 0,
-                onchanged: (dynamic value) {
-                  onChangeSlider(value, 14);
-                },
-                value: slider1_4),
-            CustomSlliderLabel(
-                value: labelperkw, numroundedlider: 2, label: '\$ Per KW/Hr'),
-            CustomSlider(
-                max: 35,
-                min: 0,
-                onchanged: (dynamic value) {
-                  onChangeSlider(value, 15);
-                },
-                value: slider1_5),
-            Padding(
+        appBar: const CustomAppBar(title: 'Chiller Result'),
+        body: BlocBuilder<DataBloc, List<ChillerData>>(
+            builder: (context, chillerData) {
+          if (chillerData == null || chillerData.isEmpty) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return SingleChildScrollView(
               padding: const EdgeInsets.only(
-                bottom: 1.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  top: 15, left: 10, right: 10, bottom: 60),
+              child: Column(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Chiller A TR     \$ $label12_4',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(
-                                color: Theme.of(context).colorScheme.secondary),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Chiller A KWR \$ $label14_20',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(
-                                color: Theme.of(context).colorScheme.secondary),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      CustomDropDown(
-                        selectedData: selectedData,
-                        onChanged: (Object? newValue) {
-                          onChangeSelectedData(newValue);
-                        },
-                        items: ChillerData.chillerdatalist
-                            .map((ChillerData? newValue) => DropdownMenuItem(
-                                  value: newValue,
-                                  child: Text(
-                                    newValue!.Column1,
-                                  ),
-                                ))
-                            .toList(),
-                      ),
-                    ],
+                  CustomSlliderLabel(
+                      value: slider1_4, label: 'Operating Hours'),
+                  CustomSlider(
+                      max: 8760,
+                      min: 0,
+                      onchanged: (dynamic value) {
+                        onChangeSlider(value, 14);
+                      },
+                      value: slider1_4),
+                  CustomSlliderLabel(
+                      value: labelperkw,
+                      numroundedlider: 2,
+                      label: '\$ Per KW/Hr'),
+                  CustomSlider(
+                      max: 35,
+                      min: 0,
+                      onchanged: (dynamic value) {
+                        onChangeSlider(value, 15);
+                      },
+                      value: slider1_5),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 1.0,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Chiller A TR     \$ $label12_4',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'Chiller A KWR \$ $label14_20',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            CustomDropDown(
+                              selectedData: selectedData,
+                              onChanged: (Object? newValue) {
+                                onChangeSelectedData(newValue);
+                              },
+                              items: chillerData
+                                  .map((ChillerData? newValue) =>
+                                      DropdownMenuItem(
+                                        value: newValue,
+                                        child: Text(
+                                          newValue!.Column1,
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Chiller B TR     \$ $label12_6',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'Chiller B KWR \$ $label14_26',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            CustomDropDown(
+                              selectedData: selectedData2,
+                              onChanged: (Object? newValue) {
+                                onChangeSelectedData2(newValue);
+                              },
+                              items: chillerData
+                                  .map((ChillerData? newValue) =>
+                                      DropdownMenuItem(
+                                        value: newValue,
+                                        child: Text(
+                                          newValue!.Column1,
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Row(children: [
+                      Container(
+                        color: Theme.of(context).colorScheme.primary,
+                        child: CustomCheckBox(
+                          ontap: (value) {
+                            ontapCalulateWithOilDeg(value);
+                          },
+                          value: calulatewithOilDeg,
+                          label: 'Calculate with Oil Degradation',
+                        ),
+                      ),
+                    ]),
+                  ),
+                  Container(
+                    color: Theme.of(context).colorScheme.outlineVariant,
+                    height: 270,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const Text(''),
+                              Visibility(
+                                  visible: calulatewithOilDeg,
+                                  child: const CustomTextForTable(
+                                      text: 'Opex (w/ Oil Degr.)')),
+                              const CustomTextForTable(text: 'Chilller Capex'),
+                              const CustomTextForTable(text: 'Opex Per Annum'),
+                              const CustomTextForTable(
+                                  text: 'Ownership (10 years)'),
+                              const CustomTextForTable(
+                                  text: 'CO2 Emissions Tons'),
+                              const CustomTextForTable(text: 'Kw/hr'),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                'Chiller A',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary),
+                              ),
+                              Visibility(
+                                  visible: calulatewithOilDeg,
+                                  child: CustomTextForTable(
+                                      text: '\$ $label38_6')),
+                              CustomTextForTable(text: '\$ $label39'),
+                              CustomTextForTable(text: '\$ $label10_11'),
+                              CustomTextForTable(text: '\$ $label20_5'),
+                              CustomTextForTable(text: '\$ $label16_1'),
+                              CustomTextForTable(text: '\$ $label16'),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                'Chiller B',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary),
+                              ),
+                              Visibility(
+                                  visible: calulatewithOilDeg,
+                                  child: CustomTextForTable(
+                                      text: '\$ $label38_9')),
+                              CustomTextForTable(text: '\$ $label12_6'),
+                              CustomTextForTable(text: '\$ $label10_9'),
+                              CustomTextForTable(text: '\$ $label20_6'),
+                              CustomTextForTable(text: '\$ $label20_1'),
+                              CustomTextForTable(text: '\$ $label20'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        'Chiller B TR     \$ $label12_6',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(
-                                color: Theme.of(context).colorScheme.secondary),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Chiller B KWR \$ $label14_26',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(
-                                color: Theme.of(context).colorScheme.secondary),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      CustomDropDown(
-                        selectedData: selectedData2,
-                        onChanged: (Object? newValue) {
-                          onChangeSelectedData2(newValue);
-                        },
-                        items: ChillerData.chillerdatalist
-                            .map((ChillerData? newValue) => DropdownMenuItem(
-                                  value: newValue,
-                                  child: Text(
-                                    newValue!.Column1,
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Text(
+                                'Saving Per Year',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                              ),
+                            ),
+                            Text(
+                              'Return on Investment',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
-                                ))
-                            .toList(),
+                            ),
+                          ],
+                        ),
                       ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Text(
+                                '\$ $label7',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                              ),
+                            ),
+                            Text(
+                              '$label33_2 years',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   )
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Row(children: [
-                Container(
-                  color: Theme.of(context).colorScheme.primary,
-                  child: CustomCheckBox(
-                    ontap: (value) {
-                      ontapCalulateWithOilDeg(value);
-                    },
-                    value: calulatewithOilDeg,
-                    label: 'Calculate with Oil Degradation',
-                  ),
-                ),
-              ]),
-            ),
-            Container(
-              color: Theme.of(context).colorScheme.outlineVariant,
-              height: 270,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text(''),
-                        Visibility(
-                            visible: calulatewithOilDeg,
-                            child: const CustomTextForTable(
-                                text: 'Opex (w/ Oil Degr.)')),
-                        const CustomTextForTable(text: 'Chilller Capex'),
-                        const CustomTextForTable(text: 'Opex Per Annum'),
-                        const CustomTextForTable(text: 'Ownership (10 years)'),
-                        const CustomTextForTable(text: 'CO2 Emissions Tons'),
-                        const CustomTextForTable(text: 'Kw/hr'),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Chiller A',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        ),
-                        Visibility(
-                            visible: calulatewithOilDeg,
-                            child: CustomTextForTable(text: '\$ $label38_6')),
-                        CustomTextForTable(text: '\$ $label39'),
-                        CustomTextForTable(text: '\$ $label10_11'),
-                        CustomTextForTable(text: '\$ $label20_5'),
-                        CustomTextForTable(text: '\$ $label16_1'),
-                        CustomTextForTable(text: '\$ $label16'),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Chiller B',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        ),
-                        Visibility(
-                            visible: calulatewithOilDeg,
-                            child: CustomTextForTable(text: '\$ $label38_9')),
-                        CustomTextForTable(text: '\$ $label12_6'),
-                        CustomTextForTable(text: '\$ $label10_9'),
-                        CustomTextForTable(text: '\$ $label20_6'),
-                        CustomTextForTable(text: '\$ $label20_1'),
-                        CustomTextForTable(text: '\$ $label20'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
-                          'Saving Per Year',
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                      ),
-                      Text(
-                        'Return on Investment',
-                        style:
-                            Theme.of(context).textTheme.displayLarge!.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
-                          '\$ $label7',
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                      ),
-                      Text(
-                        '$label33_2 years',
-                        style:
-                            Theme.of(context).textTheme.displayLarge!.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+            );
+          }
+        }));
   }
 }

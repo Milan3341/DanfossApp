@@ -1,6 +1,8 @@
+import 'package:danfossapp/bloc/Data.dart';
 import 'package:danfossapp/widgets/custom_appbar.dart';
 import 'package:danfossapp/widgets/slider_label.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/chiller_model.dart';
 import '../../widgets/custom_checkbox.dart';
 import '../../widgets/custom_dropdown.dart';
@@ -67,288 +69,259 @@ class ChillerB extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const CustomAppBar(title: 'Chiller B'),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 60),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomDropDown(
-                      selectedData: selectedData,
-                      onChanged: (Object? newValue) {
-                        onChangeSelectedData(newValue);
-                      },
-                      items: ChillerData.chillerdatalist
-                          .map((ChillerData? newValue) => DropdownMenuItem(
-                                value: newValue,
-                                child: Text(
-                                  newValue!.Column1,
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                    CustomDropDown(
-                      selectedData: selectedData,
-                      onChanged: (Object? newValue) {
-                        onChangeSelectedData(newValue);
-                      },
-                      items: ChillerData.chillerdatalist
-                          .map((ChillerData? newValue) => DropdownMenuItem(
-                                value: newValue,
-                                child: Text(
-                                  newValue!.Column2,
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        body: BlocBuilder<DataBloc, List<ChillerData>>(
+            builder: (context, chillerData) {
+          if (chillerData == null || chillerData.isEmpty) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 60),
+              child: Column(
                 children: [
-                  CustomDropDown(
-                    selectedData: selectedData,
-                    onChanged: (Object? newValue) {
-                      onChangeSelectedData(newValue);
-                    },
-                    items: ChillerData.chillerdatalist
-                        .map((ChillerData? newValue) => DropdownMenuItem(
-                              value: newValue,
-                              child: Text(
-                                newValue!.PowerAppsId,
-                              ),
-                            ))
-                        .toList(),
-                  ),
-                  CustomDropDown(
-                    selectedData: selectedData,
-                    onChanged: null,
-                    items: ChillerData.chillerdatalist
-                        .map((ChillerData? newValue) => DropdownMenuItem(
-                              value: newValue,
-                              child: Text(
-                                newValue!.Column4,
-                              ),
-                            ))
-                        .toList(),
-                  )
-                ],
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                  child: CustomSlliderLabel(
-                      display: chillerEffAdjbool,
-                      value: slider4_3,
-                      label: 'Capacity Adj')),
-              SizedBox(
-                  child: chillerEffAdjbool
-                      ? CustomSlider(
-                          value: slider4_3,
-                          min: -500,
-                          max: 500,
-                          onchanged: (dynamic value) {
-                            onchangeSlider(value, 43);
-                          })
-                      : null),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: chillerMetricBool
-                      ? CustomTextBox(
-                          text1: 'Chiller B Kwr',
-                          text2: 'IPLV KW/KWR',
-                          text3: 'Full Load')
-                      : null),
-              SizedBox(
-                  child: chillerMetricBool
-                      ? CustomTextBox(
-                          text1: '$label14_23',
-                          text2: '$label14_24',
-                          text3: '$label14_25')
-                      : null),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: chillerImperialBool
-                      ? CustomTextBox(
-                          textDirection: TextDirection.rtl,
-                          text1: 'Full load',
-                          text2: 'IPLV KW/TR',
-                          text3: 'Chiller B TR')
-                      : null),
-              SizedBox(
-                  child: chillerImperialBool
-                      ? CustomTextBox(
-                          text1: '$label12_5',
-                          text2: '$label15_8',
-                          text3: '$label15_9')
-                      : null),
-              Padding(
-                padding: const EdgeInsets.only(top: 8, left: 20, right: 20),
-                child: chillerEffAdjbool
-                    ? CustomSlliderLabel(value: slider5_4, label: 'Eff Adj')
-                    : null,
-              ),
-              SizedBox(
-                child: chillerEffAdjbool
-                    ? CustomSlider(
-                        max: 500,
-                        min: -500,
-                        onchanged: (value) {
-                          onchangeSlider(value, 54);
-                        },
-                        value: slider5_4)
-                    : null,
-              ),
-              CustomSlider(
-                  max: 100,
-                  min: -200,
-                  enableTooltip: true,
-                  onchanged: (dynamic value) {
-                    onchangeSlider(value, 34);
-                  },
-                  value: slider3_4),
-              Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: CustomTextBox(
-                      text1: '$label17_12',
-                      text2: '$label17_13',
-                      text3: '$label17_14')),
-              Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: CustomTextBox(
-                      text1: '\$ Per/Kwr',
-                      text2: '\$ Per/Ton',
-                      text3: '\$ Chiller')),
-              Container(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width / 23),
-                child: Row(
-                  children: [
-                    Container(
-                      color: Theme.of(context).colorScheme.primary,
-                      child: CustomCheckBox(
-                        ontap: (value) {
-                          onChangeChillerBoilDeg(value);
-                        },
-                        value: chillerBoilDegradationBool,
-                        label: '        Oil \nDegradation',
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 1.7,
-                      height: 90,
-                      child: chillerBoilDegradationBool
-                          ? Column(
-                              children: [
-                                CustomSlider(
-                                  max: 20,
-                                  min: 0,
-                                  onchanged: (dynamic value) {
-                                    onchangeSlider(value, 23);
-                                  },
-                                  value: slider2_3,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      '$label26_3 Percentage',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(color: Colors.black),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomDropDown(
+                          selectedData: selectedData,
+                          onChanged: (Object? newValue) {
+                            onChangeSelectedData(newValue);
+                          },
+                          items: chillerData
+                              .map((ChillerData? newValue) => DropdownMenuItem(
+                                    value: newValue,
+                                    child: Text(
+                                      newValue!.Column1,
                                     ),
-                                    Text(
-                                      ' $label32_4 Year',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(color: Colors.black),
+                                  ))
+                              .toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [],
+                  ),
+                  Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10, left: 20, right: 20),
+                      child: CustomSlliderLabel(
+                          display: chillerEffAdjbool,
+                          value: slider4_3,
+                          label: 'Capacity Adj')),
+                  SizedBox(
+                      child: chillerEffAdjbool
+                          ? CustomSlider(
+                              value: slider4_3,
+                              min: -500,
+                              max: 500,
+                              onchanged: (dynamic value) {
+                                onchangeSlider(value, 43);
+                              })
+                          : null),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: chillerMetricBool
+                          ? CustomTextBox(
+                              text1: 'Chiller B Kwr',
+                              text2: 'IPLV KW/KWR',
+                              text3: 'Full Load')
+                          : null),
+                  SizedBox(
+                      child: chillerMetricBool
+                          ? CustomTextBox(
+                              text1: '$label14_23',
+                              text2: '$label14_24',
+                              text3: '$label14_25')
+                          : null),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: chillerImperialBool
+                          ? CustomTextBox(
+                              textDirection: TextDirection.rtl,
+                              text1: 'Full load',
+                              text2: 'IPLV KW/TR',
+                              text3: 'Chiller B TR')
+                          : null),
+                  SizedBox(
+                      child: chillerImperialBool
+                          ? CustomTextBox(
+                              text1: '$label12_5',
+                              text2: '$label15_8',
+                              text3: '$label15_9')
+                          : null),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, left: 20, right: 20),
+                    child: chillerEffAdjbool
+                        ? CustomSlliderLabel(value: slider5_4, label: 'Eff Adj')
+                        : null,
+                  ),
+                  SizedBox(
+                    child: chillerEffAdjbool
+                        ? CustomSlider(
+                            max: 500,
+                            min: -500,
+                            onchanged: (value) {
+                              onchangeSlider(value, 54);
+                            },
+                            value: slider5_4)
+                        : null,
+                  ),
+                  CustomSlider(
+                      max: 100,
+                      min: -200,
+                      enableTooltip: true,
+                      onchanged: (dynamic value) {
+                        onchangeSlider(value, 34);
+                      },
+                      value: slider3_4),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: CustomTextBox(
+                          text1: '$label17_12',
+                          text2: '$label17_13',
+                          text3: '$label17_14')),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: CustomTextBox(
+                          text1: '\$ Per/Kwr',
+                          text2: '\$ Per/Ton',
+                          text3: '\$ Chiller')),
+                  Container(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 23),
+                    child: Row(
+                      children: [
+                        Container(
+                          color: Theme.of(context).colorScheme.primary,
+                          child: CustomCheckBox(
+                            ontap: (value) {
+                              onChangeChillerBoilDeg(value);
+                            },
+                            value: chillerBoilDegradationBool,
+                            label: '        Oil \nDegradation',
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.7,
+                          height: 90,
+                          child: chillerBoilDegradationBool
+                              ? Column(
+                                  children: [
+                                    CustomSlider(
+                                      max: 20,
+                                      min: 0,
+                                      onchanged: (dynamic value) {
+                                        onchangeSlider(value, 23);
+                                      },
+                                      value: slider2_3,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          '$label26_3 Percentage',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(color: Colors.black),
+                                        ),
+                                        Text(
+                                          ' $label32_4 Year',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(color: Colors.black),
+                                        ),
+                                      ],
                                     ),
                                   ],
-                                ),
-                              ],
-                            )
-                          : null,
+                                )
+                              : null,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(
-                    height: 10,
                   ),
-                  Row(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          'Opex with Oil Degradation',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      Expanded(
-                        child: Text(
-                          '\$ $label38_7',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              'Opex with Oil Degradation',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              '\$ $label38_7',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          'Opex Per Annum',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      Expanded(
-                        child: Text(
-                          '\$ $label10_8',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              'Opex Per Annum',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              '\$ $label10_8',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ));
+            );
+          }
+        }));
   }
 }

@@ -1,17 +1,30 @@
+import 'package:danfossapp/bloc/PerKW.dart';
 import 'package:danfossapp/models/value_tool_model.dart';
 import 'package:danfossapp/components/Valuetool/tool_details.dart';
 import 'package:danfossapp/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ValueTools extends StatelessWidget {
+import '../../bloc/PerKW.dart';
+
+class ValueTools extends StatefulWidget {
   ValueTools({super.key});
 
+  @override
+  State<ValueTools> createState() => _ValueToolsState();
+}
+
+class _ValueToolsState extends State<ValueTools> {
   bool selected = true;
 
   @override
   Widget build(BuildContext context) {
+    const String url =
+        'https://djangodanfoss-production.up.railway.app/data/api/perkwdata/';
+    final perkwbloc = BlocProvider.of<PerkwBloc>(context);
+    perkwbloc.fetchPerkw(url);
     return Scaffold(
       appBar: const CustomAppBar(title: 'Value Tool'),
       body: Container(

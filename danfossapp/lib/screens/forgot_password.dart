@@ -1,23 +1,8 @@
+import 'dart:convert';
+
+import 'package:danfossapp/config/routing.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(ForgotPasswordApp());
-}
-
-class ForgotPasswordApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Forgot Password Page',
-      theme: ThemeData(
-        primaryColor: Color(0xffc62828),
-        accentColor: Color(0xffc62828),
-        brightness: Brightness.light,
-      ),
-      home: ForgotPasswordPage(),
-    );
-  }
-}
+import 'package:http/http.dart' as http;
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
@@ -26,51 +11,34 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final TextEditingController _emailController = TextEditingController();
-
-  void _resetPassword(BuildContext context) {
-    // Perform password reset logic here
+  bool isLoading = false;
+  Future<void> _resetPassword(BuildContext context) async {
+    setState(() {
+      isLoading = true;
+    });
     String email = _emailController.text;
 
-    // Example validation
-    if (email.isNotEmpty) {
-      // Password reset successful
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Password Reset Successful'),
+    const String url =
+        "https://djangodanfoss-production.up.railway.app/account/api/send-reset-password-email/";
+    final Map<String, String> headers = {"Content-Type": "application/json"};
+    try {
+      final response = await http.post(Uri.parse(url),
+          headers: headers, body: jsonEncode({'email': email}));
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-                'An email has been sent to $email with further instructions.'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      // Password reset failed
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Password Reset Failed'),
-            content: Text('Please enter a valid email address.'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+                'Instruction has been sent to your ${email}. Please follow the instruction.')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content:
+                Text(responseBody['errors']['non_field_errors'].toString())));
+      }
+    } catch (e) {
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -92,31 +60,32 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 Icon(
                   Icons.vpn_key,
                   color: Theme.of(context).primaryColor,
-                  size: 80,
+                  size: 40,
                 ),
                 SizedBox(height: 30),
                 Text(
                   'Forgot Password',
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: 24,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32),
                   child: TextField(
                     controller: _emailController,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.email,
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       hintText: 'Email',
-                      hintStyle:
-                          TextStyle(color: Theme.of(context).primaryColor),
+                      hintStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.primary),
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.3),
                       border: OutlineInputBorder(
@@ -127,33 +96,46 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ),
                 SizedBox(height: 30),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
-                      'Reset Password',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: isLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : const Text(
+                              'Reset Password',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                    ),
+                    onPressed: () => _resetPassword(context),
                   ),
-                  onPressed: () => _resetPassword(context),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextButton(
                   child: Text(
                     'Back to Login',
                     style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                   onPressed: () {
-                    // Navigate back to the login page
+                    setState(() {
+                      Navigator.pushNamed(context, MyCustomroutes.loginRoute);
+                    });
                   },
                 ),
               ],

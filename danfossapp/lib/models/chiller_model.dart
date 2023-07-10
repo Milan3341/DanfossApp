@@ -45,29 +45,23 @@ class ChillerData extends Equatable {
     const ChillerData(
         Column1: "Water Cooled",
         Column2: "CARRIER",
-        Column3: "Screw ",
-        Column4: "30HXC106",
-        Column5: 355,
-        Column6: 4.87,
-        Column7: 6.74,
-        PowerAppsId: "2xfiRoRi9wU"),
-    const ChillerData(
-        Column1: "Air Cooled",
-        Column2: "DAIKIN",
-        Column3: "Screw VSD ",
-        Column4: "EWAQ350F-XL",
-        Column5: 355,
-        Column6: 3.10,
-        Column7: 4.58,
-        PowerAppsId: "8wtVG-lj1EI"),
-    const ChillerData(
-        Column1: "Water Cooled",
-        Column2: "YORK",
         Column3: "Screw",
-        Column4: "YEWS100HA5xE",
-        Column5: 355,
-        Column6: 5.21,
-        Column7: 6.21,
-        PowerAppsId: "r2du0XfYCZw")
+        Column4: "30XW-0352",
+        Column5: 369.3,
+        Column6: 5.28,
+        Column7: 6.83,
+        PowerAppsId: "wzokbMArU_0"),
   ];
+  factory ChillerData.fromJson(Map<String, dynamic> json) {
+    return ChillerData(
+      Column1: json['Column1'],
+      Column2: json['Column2'],
+      Column3: json['Column3'],
+      Column4: json['Column4'],
+      Column5: double.parse(json['Column5'].toString()),
+      Column6: double.parse(json['Column6'].toString()),
+      Column7: double.parse(json['Column7'].toString()),
+      PowerAppsId: json['PowerAppsId'],
+    );
+  }
 }
